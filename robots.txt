@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
 
+Sitemap: https://rakibul-islam-tusar.github.io/rakibul-portfolio/sitemap.xml
