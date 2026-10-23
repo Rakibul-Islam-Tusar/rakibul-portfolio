@@ -1,11 +1,11 @@
-{
+﻿{
   "name": "Rakibul Islam Tusar - .NET Software Developer",
   "short_name": "Rakibul Tusar",
   "description": "Professional portfolio of Rakibul Islam Tusar, .NET Software Developer.",
   "start_url": "/rakibul-portfolio/",
   "display": "standalone",
-  "background_color": "#07111f",
-  "theme_color": "#07111f",
+  "background_color": "#f8fafc",
+  "theme_color": "#f8fafc",
   "icons": [
     {
       "src": "assets/favicon.svg",

@@ -1,8 +1,8 @@
-(() => {
+﻿(() => {
   const root = document.documentElement;
   const themeButton = document.querySelector('.theme-toggle');
   const savedTheme = localStorage.getItem('portfolio-theme');
-  const defaultTheme = 'dark';
+  const defaultTheme = 'light';
 
   function setTheme(theme) {
     root.dataset.theme = theme;
@@ -24,10 +24,9 @@
     menuButton.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
     mobileNav?.classList.toggle('open', !open);
   });
-  mobileNav?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
-    mobileNav.classList.remove('open');
-    menuButton?.setAttribute('aria-expanded', 'false');
-  }));
+  const closeMenu = () => { mobileNav?.classList.remove('open'); menuButton?.setAttribute('aria-expanded', 'false'); menuButton?.setAttribute('aria-label', 'Open menu'); };
+  mobileNav?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', event => { if (event.key === 'Escape') closeMenu(); });
 
   const header = document.querySelector('.site-header');
   const updateHeader = () => header?.classList.toggle('scrolled', window.scrollY > 16);
