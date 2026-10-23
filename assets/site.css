@@ -52,3 +52,13 @@ a{color:inherit;text-decoration:none}button{font:inherit}.container{width:min(ca
 .project-facts dt{text-transform:uppercase;letter-spacing:.12em;font-size:10px;font-weight:700;color:var(--accent)}
 .project-facts dd{margin:5px 0 0;color:var(--muted);font-size:13px;line-height:1.55}
 @media(max-width:700px){.tailoring-gallery{padding:12px}.gallery-main img{height:220px}.gallery-thumbs{grid-template-columns:1fr}.gallery-thumbs img{height:180px}}
+
+/* Career and content enhancements */
+.career-highlight{max-width:700px;margin:18px 0 0;color:var(--accent);font:700 12px/1.6 Manrope,sans-serif;letter-spacing:.025em}
+.button-secondary{background:transparent;color:var(--text);border:1px solid var(--line);box-shadow:none}.button-secondary:hover{border-color:var(--accent);background:rgba(94,234,212,.06)}
+.about-copy{max-width:780px}.about-copy p{margin:0 0 18px}.about-copy p:last-child{margin-bottom:0}
+.role-badge{display:inline-block;margin-left:10px;padding:4px 8px;border:1px solid rgba(94,234,212,.35);border-radius:999px;background:rgba(94,234,212,.08);font-size:9px;letter-spacing:.08em;text-transform:uppercase;vertical-align:middle}
+.education-strip>div:last-child{display:grid;gap:4px}.contribution-label{margin:24px 0 0!important;color:var(--text)!important;font:700 11px Manrope,sans-serif;text-transform:uppercase;letter-spacing:.1em}.compact-project{min-height:340px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+@media(max-width:700px){.compact-project{min-height:0}.role-badge{display:block;width:max-content;margin:8px 0 0}}
+@media(max-width:375px){.container{width:min(calc(100% - 24px),var(--max))}.site-header .brand>span:last-child{font-size:13px}.hero-actions .button{width:100%;justify-content:center}.project-copy,.project-card{padding:23px}.contact-card{padding:38px 20px}.social-links{gap:18px}}
