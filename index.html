@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -72,7 +72,7 @@
 
   <header class="site-header" id="top">
     <div class="container nav-wrap">
-      <a class="brand" href="#top" aria-label="Rakibul Islam Tusar home">
+      <a class="brand" href="#top">
         <span class="brand-mark" aria-hidden="true">RT</span>
         <span>Rakibul Islam Tusar<span class="accent">.</span></span>
       </a>
@@ -198,142 +198,32 @@
           <p>Architecture decisions, workflow design, and production-oriented implementation&mdash;shown with enough technical depth to explain how each system works.</p>
         </div>
 
-        <article class="case-study" aria-labelledby="stylemart-title">
-          <div class="case-study-hero">
-            <div class="case-study-copy">
-              <div class="project-kicker"><span>Independent full-stack case study</span><span>01</span></div>
-              <p class="case-study-status"><span></span> Live demo available</p>
-              <h3 id="stylemart-title">StyleMart &mdash; Secure E-commerce Operations System</h3>
-              <p class="case-study-lead">I designed and built a modular commerce platform that connects the customer storefront with catalog, inventory, order, sales, and back-office workflows. The core challenge was not just displaying products&mdash;it was keeping every business action traceable, permission-aware, and consistent as an order moves through the system.</p>
-              <div class="case-study-actions"><a class="button" href="http://stylemartbd.somee.com/" target="_blank" rel="noopener noreferrer">Explore live storefront <span aria-hidden="true">&nearr;</span></a><a class="text-link" href="#stylemart-architecture">View architecture <span aria-hidden="true">&darr;</span></a></div>
-              <p class="demo-note">Public storefront link only. Administrative credentials are intentionally not published.</p>
-            </div>
-            <figure class="storefront-shot"><a href="assets/images/stylemart-storefront.png" target="_blank" rel="noopener"><img src="assets/images/stylemart-storefront.png" alt="StyleMart public e-commerce storefront shown in a desktop browser" loading="lazy" width="1440" height="1000"></a><figcaption><strong>Public storefront</strong><span>Responsive catalog, discovery, account, cart, and order entry points.</span></figcaption></figure>
-          </div>
-          <div class="case-study-summary"><div><span>Architecture</span><strong>Modular monolith</strong></div><div><span>Backend</span><strong>ASP.NET MVC 5 / C#</strong></div><div><span>Data access</span><strong>SQL Server + Dapper</strong></div><div><span>Delivery</span><strong>Versioned migrations</strong></div></div>
-          <div class="case-study-section" id="stylemart-architecture">
-            <div class="case-study-heading"><p class="mini-label">System architecture</p><h4>Clear boundaries from request to transaction.</h4><p>I kept the application as a modular monolith: simpler to deploy and operate, while controllers, business services, repositories, and SQL remain deliberately separated. This gives the codebase a practical path toward module-by-module modernization without a risky rewrite.</p></div>
-            <div class="architecture-map" role="img" aria-label="StyleMart architecture flows from Razor views and MVC controllers through business services and repository interfaces to SQL Server, with security policies applied across requests">
-              <div class="architecture-layer"><span>Presentation</span><strong>Razor Views</strong><small>Storefront &middot; Customer area &middot; Admin portal</small></div><i aria-hidden="true">&darr;</i><div class="architecture-layer"><span>HTTP boundary</span><strong>MVC Controllers</strong><small>Validation &middot; routing &middot; anti-forgery</small></div><i aria-hidden="true">&darr;</i><div class="architecture-layer architecture-accent"><span>Business layer</span><strong>Domain Services</strong><small>Checkout &middot; inventory &middot; order state &middot; returns</small></div><i aria-hidden="true">&darr;</i><div class="architecture-layer"><span>Persistence</span><strong>Repository Interfaces + Dapper</strong><small>Parameterized SQL &middot; transaction boundaries</small></div><i aria-hidden="true">&darr;</i><div class="architecture-layer"><span>Data</span><strong>SQL Server</strong><small>Constraints &middot; stored procedures &middot; immutable history</small></div>
-              <div class="security-rail"><span>Cross-cutting controls</span><strong>Authentication &middot; deny-by-default permissions &middot; audit logging &middot; throttling &middot; secure headers</strong></div>
-            </div>
-          </div>
-          <div class="case-study-section workflow-section">
-            <div class="case-study-heading"><p class="mini-label">Workflow analysis</p><h4>One order, protected across its full lifecycle.</h4><p>Each step has an explicit owner and validation boundary. Stock-sensitive and multi-table updates are handled as transactions, while order status history provides an audit trail for operational decisions.</p></div>
-            <ol class="workflow-track"><li><span>01</span><strong>Discover</strong><small>Search, filter, compare, wishlist, recently viewed</small></li><li><span>02</span><strong>Configure</strong><small>Product variants, price, availability, cart validation</small></li><li><span>03</span><strong>Checkout</strong><small>Customer identity, saved address, totals, delivery charge</small></li><li><span>04</span><strong>Commit</strong><small>Transactional order creation and inventory movement</small></li><li><span>05</span><strong>Operate</strong><small>Admin processing, shipment, payment, notifications</small></li><li><span>06</span><strong>Close loop</strong><small>Delivery confirmation, rating, return, refund history</small></li></ol>
-          </div>
-          <div class="case-study-section security-section">
-            <div class="case-study-heading"><p class="mini-label">Security engineering</p><h4>Security is enforced as policy, not left to individual pages.</h4></div>
-            <div class="security-grid"><article><span>01</span><h5>Access control</h5><p>Separate customer and admin authorization, role/permission checks, and a global deny-by-default policy for unknown admin actions.</p></article><article><span>02</span><h5>Request protection</h5><p>POST-only mutations, anti-forgery validation, local return URLs, request throttling, and controlled order-state transitions.</p></article><article><span>03</span><h5>Data &amp; files</h5><p>Parameterized Dapper persistence, transactional multi-table writes, externalized secrets, and bounded image decode/re-encode with server-generated names.</p></article><article><span>04</span><h5>Traceability</h5><p>Admin audit filters, immutable status and inventory history, generic client errors, server-side logging, and versioned database migrations.</p></article></div>
-            <div class="security-disclosure"><strong>Honest deployment status</strong><p>The hardened source and release package passed build, Razor precompile, local runtime, and dependency-advisory checks. The current public Somee deployment is an older build and does not yet include every hardening change; HTTPS, secret rotation, redeployment, and a final live VAPT retest remain required before describing production as fully secured.</p></div>
-          </div>
-          <div class="case-study-footer"><div><p class="mini-label">Engineering scope</p><p>Catalog &amp; variants &middot; cart &amp; checkout &middot; customer accounts &middot; order lifecycle &middot; inventory ledger &middot; campaigns &amp; coupons &middot; payments &amp; returns &middot; support &amp; notifications &middot; admin operations &middot; finance reporting</p></div><ul class="tech-list"><li>C#</li><li>.NET Framework 4.8</li><li>ASP.NET MVC 5</li><li>SQL Server</li><li>Dapper</li><li>Bootstrap</li><li>jQuery</li></ul></div>
-        </article>
-
-        <article class="case-study dms-case-study" aria-labelledby="dms-title">
-          <div class="case-study-hero">
-            <div class="case-study-copy">
-              <div class="project-kicker"><span>Production distribution platform</span><span>02</span></div>
-              <p class="case-study-status"><span></span> In live use for 1+ year</p>
-              <h3 id="dms-title">OSAKA Distribution Management System</h3>
-              <p class="case-study-lead">A full distribution operations platform built for OSAKA and used in live operations for more than a year. I designed the system around company and branch context, role-controlled menus, master data, sales and purchase lifecycles, field operations, and management reporting. The solution later became the basis of a tailored demonstration for Bangladesh Diesel Plant.</p>
-              <div class="case-study-actions"><a class="button" href="https://dev-dms.shampanlab.com/" target="_blank" rel="noopener noreferrer">View live demo <span aria-hidden="true">&nearr;</span></a><a class="text-link" href="#dms-architecture">Explore system design <span aria-hidden="true">&darr;</span></a></div>
-              <p class="demo-note">Demo login details are shared privately with authorized reviewers and are not published here.</p>
-            </div>
-            <figure class="storefront-shot dms-shot"><a href="assets/images/dms-company-login.png" target="_blank" rel="noopener"><img src="assets/images/dms-company-login.png" alt="DMS secure login interface with company selection" loading="lazy" width="1440" height="1000"></a><figcaption><strong>Company-aware access</strong><span>User authentication begins inside an explicit company context.</span></figcaption></figure>
-          </div>
-          <div class="case-study-summary"><div><span>Production proof</span><strong>1+ year live use</strong></div><div><span>Web platform</span><strong>ASP.NET MVC</strong></div><div><span>Service layer</span><strong>ASP.NET Core 6 API</strong></div><div><span>Field client</span><strong>Flutter / Dart</strong></div></div>
-          <div class="case-study-section" id="dms-architecture">
-            <div class="case-study-heading"><p class="mini-label">System architecture</p><h4>One operational core, delivered across web and field teams.</h4><p>The web portal follows an MVC and repository-based structure, while a separate ASP.NET Core API exposes the same distribution domains to mobile users. Shared data contracts connect both channels to company- and branch-aware SQL Server operations.</p></div>
-            <div class="platform-map" role="img" aria-label="DMS architecture with web users and Flutter field users connecting through MVC and REST API layers to services, repositories, SQL Server, and Crystal Reports">
-              <div class="platform-client"><span>Back office</span><strong>ASP.NET MVC Web Portal</strong><small>Management &middot; operations &middot; setup</small></div><div class="platform-client"><span>Field operations</span><strong>Flutter Mobile App</strong><small>Salesperson &middot; delivery person</small></div>
-              <div class="platform-connector"><i></i><span>Session / Claims</span><b>+</b><span>JWT Bearer</span><i></i></div>
-              <div class="platform-core"><span>Application core</span><strong>MVC Controllers + ASP.NET Core REST API</strong><small>Service layer &middot; repositories &middot; view models &middot; validation</small></div>
-              <div class="platform-output"><span>SQL Server</span><span>Stored procedures</span><span>Crystal Reports</span><span>Audit trail</span></div>
-            </div>
-          </div>
-          <div class="case-study-section workflow-section">
-            <div class="case-study-heading"><p class="mini-label">Authentication &amp; authorization</p><h4>Identity is resolved before operational data is exposed.</h4><p>Login combines user credentials with a selected company. The resulting user, company, token, and branch context are carried through claims/session and used to build an assigned menu and scope transactions.</p></div>
-            <ol class="workflow-track auth-track"><li><span>01</span><strong>Select company</strong><small>Login begins with an explicit operating-company boundary.</small></li><li><span>02</span><strong>Authenticate</strong><small>ASP.NET Identity validates the user; mobile/API access issues a JWT bearer token.</small></li><li><span>03</span><strong>Resolve access</strong><small>User and role mappings determine the permitted menu and actions.</small></li><li><span>04</span><strong>Choose branch</strong><small>Active branch context scopes codes, records, and operational workflows.</small></li><li><span>05</span><strong>Operate safely</strong><small>Authenticated web/API requests carry the established context.</small></li><li><span>06</span><strong>Audit</strong><small>User, branch, timestamps, and transaction status support traceability.</small></li></ol>
-          </div>
-          <div class="case-study-section dms-operations">
-            <div class="case-study-heading"><p class="mini-label">Distribution workflow</p><h4>Data moves from planning to delivery&mdash;without losing branch context.</h4><p>The system manages both master and transactional data, so operational teams work from one connected source instead of disconnected sales, stock, route, and delivery records.</p></div>
-            <div class="domain-grid"><article><span>Master data</span><strong>Products, batches, UOM, suppliers, customers, routes, areas</strong></article><article><span>Commercial controls</span><strong>Credit limits, advances, campaigns, targets, achievements</strong></article><article><span>Procurement</span><strong>Purchase order, purchase, return, supplier history</strong></article><article><span>Sales execution</span><strong>Sales order, invoice, delivery, sales return, delivery return</strong></article><article><span>Field force</span><strong>Salesperson routes, visits, targets, mobile order capture</strong></article><article><span>Management output</span><strong>Kendo grids, branch data views, Crystal Reports, print-ready documents</strong></article></div>
-          </div>
-          <div class="case-study-section security-section">
-            <div class="case-study-heading"><p class="mini-label">Production evidence</p><h4>Built for continued operational use, not a one-off prototype.</h4></div>
-            <div class="security-grid proof-grid"><article><span>Live adoption</span><h5>OSAKA</h5><p>Used in day-to-day operations for more than one year, with strong stakeholder feedback.</p></article><article><span>Adaptability</span><h5>Bangladesh Diesel Plant</h5><p>A tailored demonstration version was recently prepared to present the same architecture for another diesel-industry workflow.</p></article><article><span>Reporting</span><h5>Crystal Reports</h5><p>Operational data is transformed into business-ready reports and printable documents through the configured reporting layer.</p></article><article><span>Mobile workforce</span><h5>Flutter + Dart</h5><p>Salespeople and delivery personnel use a dedicated mobile experience backed by the ASP.NET Core API.</p></article></div>
-          </div>
-          <div class="case-study-footer"><div><p class="mini-label">My engineering scope</p><p>Business workflow analysis &middot; database and module design &middot; MVC implementation &middot; company/branch context &middot; role-menu access &middot; API development &middot; transaction handling &middot; reporting integration &middot; production support</p></div><ul class="tech-list"><li>C#</li><li>ASP.NET MVC</li><li>.NET 6 API</li><li>SQL Server</li><li>Entity Framework</li><li>Kendo UI</li><li>Crystal Reports</li><li>Flutter</li><li>Dart</li></ul></div>
-        </article>
-
-        <article class="case-study tailoring-case-study" aria-labelledby="tailoring-title">
-          <div class="case-study-hero tailoring-hero">
-            <div class="case-study-copy">
-              <div class="project-kicker"><span>Multi-branch production ERP</span><span>03</span></div>
-              <p class="case-study-status"><span></span> Live across 12 branches</p>
-              <h3 id="tailoring-title">Fit Elegance &mdash; Tailoring Management System</h3>
-              <p class="case-study-lead">A production tailoring ERP used by Fit Elegance across 12 branches. I helped translate the complete physical workflow&mdash;customer order, fabric, measurement, design, trial, production, payment, transfer, and delivery&mdash;into one branch-aware operational system.</p>
-              <div class="production-note"><strong>Deployment model</strong><span>Hosted on the client&rsquo;s physical server and accessed by authorized branches through a public IP and assigned port.</span></div>
-            </div>
-            <div class="project-visual tailoring-gallery">
-            <figure class="gallery-main">
-              <a href="assets/images/tailoring-order-management.jpg" target="_blank" rel="noopener">
-                <img src="assets/images/tailoring-order-management.jpg" alt="Tailoring Management System order creation interface showing customer, delivery, item, measurement, and payment workflows" loading="lazy" width="1896" height="880">
-              </a>
-              <figcaption><strong>Order Management</strong><span>Customer information, order details, measurements, and payment workflow.</span></figcaption>
-            </figure>
-            <div class="gallery-thumbs">
-              <figure>
-                <a href="assets/images/tailoring-fabric-selection.jpg" target="_blank" rel="noopener">
-                  <img src="assets/images/tailoring-fabric-selection.jpg" alt="Product and fabric inventory interface with filters, barcodes, pricing, and stock data" loading="lazy" width="1892" height="951">
-                </a>
-                <figcaption><strong>Fabric Selection</strong><span>Fabric catalog, barcode, unit price, and grid-based data.</span></figcaption>
-              </figure>
-              <figure>
-                <a href="assets/images/tailoring-print-factory-copy.jpg" target="_blank" rel="noopener">
-                  <img src="assets/images/tailoring-print-factory-copy.jpg" alt="Tailoring print and factory copy interface with customer, style, measurement, and billing details" loading="lazy" width="1080" height="810">
-                </a>
-                <figcaption><strong>Print &amp; Factory Copy</strong><span>Operational print layout with customer, fabric, and billing details.</span></figcaption>
-              </figure>
-            </div>
-            <p class="gallery-note">Interface screenshots are presented as portfolio evidence; sensitive business data is excluded.</p>
-            </div>
-          </div>
-          <div class="case-study-summary"><div><span>Operational reach</span><strong>12 live branches</strong></div><div><span>Hosting</span><strong>Client physical server</strong></div><div><span>Application</span><strong>MVC + .NET 6 API</strong></div><div><span>Access model</span><strong>Role + branch scoped</strong></div></div>
-          <div class="case-study-section">
-            <div class="case-study-heading"><p class="mini-label">Architecture</p><h4>A branch-aware core connecting counter, production, and management teams.</h4><p>The platform separates the MVC web experience from a .NET 6 API and layered service/repository projects. Company, authenticated user, and active branch context flow into each operational request, while SQL transactions keep multi-record order and transfer writes consistent.</p></div>
-            <div class="platform-map tailoring-platform" role="img" aria-label="Fit Elegance architecture with twelve branch web users and a Flutter client connected to MVC and .NET API layers, transactional services, SQL Server, and reporting">
-              <div class="platform-client"><span>12 branches</span><strong>ASP.NET MVC Web Portal</strong><small>Order counter &middot; POS &middot; production &middot; setup</small></div><div class="platform-client"><span>Mobile-ready channel</span><strong>Flutter Client</strong><small>Company &middot; login &middot; branch &middot; permitted menus</small></div>
-              <div class="platform-connector"><i></i><span>Claims / session</span><b>+</b><span>JWT bearer</span><i></i></div>
-              <div class="platform-core"><span>Application boundary</span><strong>MVC Controllers + REST API</strong><small>Services &middot; repositories &middot; view models &middot; validation</small></div>
-              <div class="platform-output"><span>SQL Server</span><span>Transactions</span><span>Report API / PDF</span><span>Audit fields</span></div>
-            </div>
-          </div>
-          <div class="case-study-section workflow-section">
-            <div class="case-study-heading"><p class="mini-label">Order-to-delivery workflow</p><h4>The software mirrors the actual tailoring floor.</h4><p>One order coordinates customer details, garment lines, fabric, measurements, style choices, making charges, trial and delivery commitments, production progress, settlement, and operational documents.</p></div>
-            <ol class="workflow-track tailoring-track"><li><span>01</span><strong>Capture customer</strong><small>Profile, contact, delivery address, reference, branch context.</small></li><li><span>02</span><strong>Build garment</strong><small>Item, fabric source, design, sample, quantity, urgency.</small></li><li><span>03</span><strong>Record fit</strong><small>Item-specific measurements, remarks, trial date and time.</small></li><li><span>04</span><strong>Price &amp; collect</strong><small>Fabric, making charge, VAT/SD, discount, advance and dues.</small></li><li><span>05</span><strong>Run production</strong><small>Process templates, receive, complete, alteration and rework stages.</small></li><li><span>06</span><strong>Deliver &amp; report</strong><small>POS settlement, factory/customer copies, branch and management reports.</small></li></ol>
-          </div>
-          <div class="case-study-section dms-operations">
-            <div class="case-study-heading"><p class="mini-label">Multi-branch operations</p><h4>Head office visibility with controlled branch execution.</h4><p>Super-admin users can switch operational context and review consolidated activity, while user-to-branch mapping and assigned menus keep branch teams focused on the functions and records relevant to them.</p></div>
-            <div class="domain-grid"><article><span>Branch control</span><strong>Company login, assigned branches, branch switch, branch-scoped codes and data</strong></article><article><span>Authorization</span><strong>User, role and group menu mapping with dynamically assigned navigation</strong></article><article><span>Production</span><strong>Process templates, new receive/complete, alteration receive/complete, progress visibility</strong></article><article><span>Inventory movement</span><strong>Transfer issue and transfer receive between operational locations</strong></article><article><span>Management dashboard</span><strong>Orders, pending work, completed production, value, advances, dues, procurement and trends</strong></article><article><span>Documents &amp; reporting</span><strong>Factory copy, customer copy, payment and operational PDF/report output</strong></article></div>
-          </div>
-          <div class="case-study-section security-section">
-            <div class="case-study-heading"><p class="mini-label">My contribution &amp; production impact</p><h4>Engineering work grounded in live branch operations.</h4></div>
-            <div class="security-grid proof-grid"><article><span>Workflow engineering</span><h5>Business rules</h5><p>Implemented and refined ordering, pricing, discount, VAT, delivery scheduling, measurement, production, and printing behavior.</p></article><article><span>Data transition</span><h5>Migration</h5><p>Supported migration of approximately 3,000 fabric records plus member and branch data into the operational system.</p></article><article><span>Operational UX</span><h5>Branch usability</h5><p>Improved fabric search and selection, order editing, factory documents, responsive workflows, and management visibility.</p></article><article><span>Deployment support</span><h5>Live environment</h5><p>Supported the physical-server deployment used by twelve branches and continued production-oriented troubleshooting and refinement.</p></article></div>
-          </div>
-          <div class="case-study-footer"><div><p class="mini-label">Engineering scope</p><p>Requirement analysis &middot; layered architecture &middot; database design &middot; MVC and API development &middot; branch access &middot; role-menu authorization &middot; transactional workflows &middot; migration &middot; reporting &middot; production support</p></div><ul class="tech-list"><li>C#</li><li>ASP.NET MVC</li><li>.NET 6 API</li><li>SQL Server</li><li>ADO.NET</li><li>Kendo UI</li><li>jQuery</li><li>Flutter</li><li>GetX</li><li>Dio</li></ul></div>
-        </article>
-
-        <div class="project-grid">
-          <article class="project-card optional-image-card reveal">
-            <img class="project-card-shot" data-optional-src="assets/images/fixed-asset.webp" alt="Anonymized Fixed Asset and CAPEX interface" loading="lazy" width="1200" height="750">
-            <div class="project-card-number">04</div>
-            <p class="project-type">ERP workflow</p>
-            <h3>Fixed Asset & CAPEX Management</h3>
-            <p><strong>Role:</strong> Workflow and validation development. Helped turn manual CAPEX controls into traceable asset lifecycle steps, including approved-budget checks, acquisition references, registration, employee assignment, and transfers.</p>
-            <div class="mini-flow" aria-hidden="true"><span>Request</span><i></i><span>Acquire</span><i></i><span>Manage</span></div>
-            <ul class="tech-list"><li>C#</li><li>SQL Server</li><li>Workflow</li></ul>
+        <div class="project-index-grid"><article class="project-index-card"><figure><img src="assets/images/stylemart-storefront.png" alt="StyleMart storefront" loading="lazy"></figure><div class="project-index-copy"><div class="project-kicker"><span>Independent full-stack system</span><span>01</span></div><h3>StyleMart E-commerce Operations</h3><p>Storefront, catalog, inventory, orders and permission-aware back-office workflows.</p><p><strong>My role:</strong> End-to-end design and implementation.</p><a class="button" href="stylemart.html">Read case study &rarr;</a></div></article><article class="project-index-card"><figure><img src="assets/images/dms-company-login.png" alt="OSAKA DMS login" loading="lazy"></figure><div class="project-index-copy"><div class="project-kicker"><span>1+ year live use</span><span>02</span></div><h3>OSAKA Distribution Management System</h3><p>Company- and branch-aware web, API and Flutter distribution platform.</p><p><strong>My role:</strong> Workflow, web, API, mobile and support.</p><a class="button" href="osaka-dms.html">Read case study &rarr;</a></div></article><article class="project-index-card"><figure><img src="assets/images/tailoring-order-management.jpg" alt="Fit Elegance order interface" loading="lazy"></figure><div class="project-index-copy"><div class="project-kicker"><span>Live across 12 branches</span><span>03</span></div><h3>Fit Elegance Tailoring Management</h3><p>Branch ERP with production, transfers, reporting and optimized fabric lookup.</p><p><strong>My role:</strong> Workflows, migration, optimization and support.</p><a class="button" href="fit-elegance.html">Read case study &rarr;</a></div></article><article class="project-index-card project-index-card-noimage"><div class="project-index-copy"><div class="project-kicker"><span>Live at Wellbeing</span><span>04</span></div><h3>Hospital Management System</h3><p>SQL Server and API core serving management, doctor and patient experiences.</p><p><strong>My role:</strong> Doctor and patient UI ownership.</p><a class="button" href="hospital-management.html">Read case study &rarr;</a><p class="demo-note">Sanitized screenshots will be added after client approval.</p></div></article></div><div class="project-grid additional-work-grid">
+          <article class="project-card reveal">
+            <div class="project-card-number">05</div>
+            <p class="project-type">Retail operations project</p>
+            <h3>Point of Sale (POS) System</h3>
+            <p>A separate company project focused on point-of-sale and retail operations. It is listed independently so its scope is not confused with the large e-commerce ERP.</p>
+            <div class="mini-flow" aria-hidden="true"><span>Retail</span><i></i><span>POS</span><i></i><span>Operations</span></div>
+            <p class="project-disclosure">Detailed modules, architecture, deployment status, and my exact contribution will be added after the approved project information is documented.</p>
+            <ul class="tech-list"><li>POS</li><li>Retail Operations</li><li>Company Project</li></ul>
+          </article>
+          <article class="project-card reveal">
+            <div class="project-card-number">06</div>
+            <p class="project-type">Enterprise commerce project</p>
+            <h3>Large E-commerce ERP</h3>
+            <p>A separate large-scale e-commerce ERP project developed through my company. It represents enterprise commerce work beyond my independent StyleMart case study.</p>
+            <div class="mini-flow" aria-hidden="true"><span>E-commerce</span><i></i><span>ERP</span><i></i><span>Operations</span></div>
+            <p class="project-disclosure">Detailed modules, architecture, deployment status, and my exact contribution will be added only from confirmed, portfolio-safe project information.</p>
+            <ul class="tech-list"><li>E-commerce</li><li>ERP</li><li>Enterprise Software</li></ul>
+          </article>
+          <article class="project-card reveal ongoing-work-card">
+            <div class="project-card-number">+</div>
+            <p class="project-type">Ongoing company contribution</p>
+            <h3>Business Software Across Multiple Domains</h3>
+            <p>Alongside the featured systems, I contribute to multiple office projects through feature development, UI and API integration, SQL work, issue resolution, and production support. Client-confidential work is summarized by responsibility rather than exposed through private data or unapproved screenshots.</p>
+            <div class="mini-flow" aria-hidden="true"><span>Analyze</span><i></i><span>Build</span><i></i><span>Support</span></div>
+            <ul class="tech-list"><li>Feature Development</li><li>SQL Server</li><li>API</li><li>Support</li></ul>
           </article>
         </div>
       </div>
@@ -348,7 +238,7 @@
         </div>
         <div class="skill-groups">
           <article class="skill-group reveal"><span>01</span><div><h3>Backend</h3><p>C# &middot; ASP.NET MVC &middot; ASP.NET Core &middot; .NET Framework &middot; Web API &middot; REST API Integration</p></div></article>
-          <article class="skill-group reveal"><span>02</span><div><h3>Data</h3><p>Microsoft SQL Server &middot; T-SQL &middot; Stored Procedures &middot; Entity Framework &middot; Dapper &middot; ADO.NET &middot; Database Design &middot; Data Migration</p></div></article>
+          <article class="skill-group reveal"><span>02</span><div><h3>Data</h3><p>Microsoft SQL Server &middot; T-SQL &middot; Stored Procedures &middot; SQL Views &middot; Entity Framework &middot; Dapper &middot; ADO.NET &middot; Database Design &middot; Data Migration &middot; Query Optimization</p></div></article>
           <article class="skill-group reveal"><span>03</span><div><h3>Frontend</h3><p>JavaScript &middot; jQuery &middot; Kendo UI &middot; Razor Views &middot; Bootstrap &middot; HTML5 &middot; CSS3</p></div></article>
           <article class="skill-group reveal"><span>04</span><div><h3>Systems</h3><p>IIS &middot; Git &middot; Crystal Reports &middot; Inno Setup &middot; Visual Studio &middot; Windows</p></div></article>
         </div>
